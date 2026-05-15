@@ -25,7 +25,7 @@ jobs:
 
       - name: Update Backend Deployment
         run: |
-          sed -i "s|image:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/e-commerce-backend:${{ github.event.workflow_run.head_sha }}|g" gitops/apps/ecommerce/backend/deployment.yaml
+          sed -i "s|image:.*|image: ${{ secrets.DOCKERHUB_USERNAME }}/e-commerce-backend:${{ github.event.workflow_run.head_sha }}|g" gitops/apps/ecommerce/backend/deployment.yml
 
       - name: Commit and Push Changes
         run: |
