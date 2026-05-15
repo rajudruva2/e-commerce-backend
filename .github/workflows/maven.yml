@@ -1,9 +1,7 @@
-name: Java CI Pipeline
+name: Backend CI
+
 on:
   push:
-    branches:
-      - main
-  pull_request:
     branches:
       - main
 
@@ -11,7 +9,7 @@ jobs:
 
   build:
 
-    runs-on:  ubuntu-22.04
+    runs-on: ubuntu-22.04
 
     steps:
 
@@ -35,7 +33,9 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build Docker Image
-        run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/e-commerce-backend:${{ github.sha }} .
+        run: |
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/e-commerce-backend:${{ github.sha }} .
 
       - name: Push Docker Image
-        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/e-commerce-backend:${{ github.sha }}    
+        run: |
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/e-commerce-backend:${{ github.sha }}
